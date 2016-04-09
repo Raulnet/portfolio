@@ -1,0 +1,254 @@
+{% extends "/Movie/layout.html.twig" %}
+
+{% block title %}
+    {% if genre is defined %}
+        {{ genre }}
+    {% else %}
+        {{ 'home' }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('silex-movie') }}">Home</a></li>
+            {% if genre is defined %}
+                <li>genre</li>
+                <li>{{ genre }}</li>
+            {% endif %}
+        </ol>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <!-- ===== PANEL HEADER ================================================================================ -->
+            <div class="panel-heading"><span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                <b> {% if genre is defined %}
+                        {{ genre|upper }}
+                    {% else %}
+                        {{ 'FILMS EN SALLE' }}
+                    {% endif %}
+                </b>
+            </div>
+            <!-- ===== END PANEL HEADER ============================================================================ -->
+            <div class="panel-body">
+                {% for movie in movies %}
+                    <div class="col-md-12 articleMovie">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6">
+                                {% if movie.poster is defined %}
+                                    <a href="#" data-toggle="modal" data-target="#my{{ movie.code }}">
+                                        <img class="img-responsive" src="{{ movie.poster.href }}">
+                                    </a>
+                                    <div class="modal fade" id="my{{ movie.code }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span
+                                                                aria-hidden="true">&times;</span></button>
+
+                                                    <h4 class="modal-title" id="myModalLabel"><a
+                                                                href="{{ path('movie', {'code': movie.code}) }}">
+                                                            {{ movie.title|convert_encoding('UTF-8', 'iso-8859-1')|replace({"?" : "'"}) }}
+                                                        </a></h4>
+                                                    {% for categorie in movie.genre %}
+                                                        <a href="{{ path('genre', {'code': categorie.code,
+                                                        'genre':categorie[0]|convert_encoding('UTF-8', 'iso-8859-1'),
+                                                        'page' : 1}) }}">
+                                                            <span class="label label-primary">{{ categorie[0]|convert_encoding('UTF-8', 'iso-8859-1') }}</span>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-default" data-dismiss="modal"> <img
+                                                                class="img-responsive"
+                                                                src="{{ movie.poster.href }}"></a>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                                                    <a class="btn btn-primary pull-right"
+                                                       href="{{ path('movie', {'code': movie.code}) }}">
+                                                        <span class="glyphicon glyphicon-search"
+                                                              aria-hidden="true"></span> read more</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-9 col-xs-6">
+                                <h4>
+                                    <a href="{{ path('movie', {'code': movie.code}) }}">
+                                        {{ movie.title|convert_encoding('UTF-8', 'iso-8859-1') }}
+                                    </a>
+                                    {% for categorie in movie.genre %}
+                                        <a href="{{ path('genre', {'code': categorie.code,
+                                        'genre':categorie[0]|convert_encoding('UTF-8', 'iso-8859-1'),
+                                        'page' : 1}) }}">
+                                            <span class="label label-primary">{{ categorie[0]|convert_encoding('UTF-8', 'iso-8859-1') }}</span>
+                                        </a>
+
+                                    {% endfor %}
+                                </h4>
+                                {% if movie.synopsisShort is defined %}
+                                    <p>Synopsis :</p>
+
+                                    <p>{{ movie.synopsisShort|striptags|convert_encoding('UTF-8', 'iso-8859-1')|replace({"?" : "'"}) }}</p>
+                                {% endif %}
+                                {% if movie.keywords is defined %}
+                                    <p>
+                                        <small><i class="glyphicon glyphicon-tags"></i>
+                                            Mots-clefs: {{ movie.keywords|convert_encoding('UTF-8', 'iso-8859-1') }}
+                                        </small>
+                                    </p>
+                                {% endif %}
+                                <p class="movieDate">Date de sortie: {{ movie.release.releaseDate }}
+                                    <a class="btn btn-primary btn-sm pull-right"
+                                       href="{{ path('movie', {'code': movie.code}) }}">
+                                        read more</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+                <div style="text-align: center">
+                    <!-- ===== PAGINATOR =============================================================================== -->
+                    {% if paginator is defined %}
+                        <nav>
+                            <ul class="pagination">
+                                {% for page in paginator %}
+                                    <li><a href="{{ path('page', {'page': page.pageId}) }}">{{ page.value|raw }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                    <!-- ===== END PAGINATOR ======================================================================= -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <!-- ===== Block Prochainement ============================================================================= -->
+        <div class="panel panel-success">
+            <div class="panel-heading"><span class="glyphicon glyphicon-facetime-video"
+                                             aria-hidden="true"></span><b>
+                    Prochainement</b></div>
+            <div class="panel-body">
+                {% if slider is defined %}
+                    {% include "/Movie/slider.html.twig" %}
+                {% endif %}
+                {% for movie in nextMovies %}
+                    <div class="col-md-12 ">
+                        <div class="row articleNextMovie">
+                            <div class="col-md-4 col-xs-6">
+                                {% if movie.poster is defined %}
+                                    <a href="#" data-toggle="modal" data-target="#my{{ movie.code }}">
+                                        <img class="img-responsive" src="{{ movie.poster.href }}">
+                                    </a>
+                                    <div class="modal fade" id="my{{ movie.code }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span
+                                                                aria-hidden="true">&times;</span></button>
+
+                                                    <h4 class="modal-title" id="myModalLabel"><a
+                                                                href="{{ path('movie', {'code': movie.code}) }}">
+                                                            {{ movie.title|convert_encoding('UTF-8', 'iso-8859-1')|replace({"?" : "'"}) }}
+                                                        </a></h4>
+                                                    {% for categorie in movie.genre %}
+                                                        <a href="{{ path('genre', {'code': categorie.code,
+                                                        'genre':categorie[0]|convert_encoding('UTF-8', 'iso-8859-1'),
+                                                        'page' : 1}) }}">
+                                                            <span class="label label-success">{{ categorie[0]|convert_encoding('UTF-8', 'iso-8859-1') }}</span>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-default" data-dismiss="modal"> <img
+                                                                class="img-responsive"
+                                                                src="{{ movie.poster.href }}"></a>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                                                    <a class="btn btn-success pull-right"
+                                                       href="{{ path('movie', {'code': movie.code}) }}">
+                                                        <span class="glyphicon glyphicon-search"
+                                                              aria-hidden="true"></span> read more</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8 col-xs-6">
+                                <h4><a href="{{ path('movie', {'code': movie.code}) }}">
+                                        {{ movie.title|convert_encoding('UTF-8', 'iso-8859-1') }}
+                                    </a>
+                                    {% for categorie in movie.genre %}
+                                        <a href="{{ path('genre', {'code': categorie.code,
+                                        'genre':categorie[0]|convert_encoding('UTF-8', 'iso-8859-1'),
+                                        'page' : 1}) }}">
+                                            <span class="label label-success">{{ categorie[0]|convert_encoding('UTF-8', 'iso-8859-1') }}</span>
+                                        </a>
+                                    {% endfor %}
+                                </h4>
+                                <i class="movieDate">Date de sortie: <br/> {{ movie.release.releaseDate }}
+                                    <a class="btn btn-success btn-xs pull-right"
+                                       href="{{ path('movie', {'code': movie.code}) }}">
+                                        read more </a>
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- =============================================================================== END BLOCK Prochainement -->
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><b>
+                    Articles</b></div>
+            <div class="panel-body">
+                {% for article in articles %}
+                    <article class="article">
+                        <h4><a class="articleTitle"
+                               href="{{ path('article', {'id': article.id}) }}">{{ article.title }}</a>
+                        </h4>
+
+                        <p>{{ article.content }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><b> Admin
+                    post</b></div>
+            <div class="panel-body">
+                {% for article in articles %}
+                    <article class="article">
+                        <h4><a class="articleTitle"
+                               href="{{ path('article', {'id': article.id}) }}}">{{ article.title }}</a>
+                        </h4>
+
+                        <p>{{ article.content }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

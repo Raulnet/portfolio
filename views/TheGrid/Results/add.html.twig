@@ -1,0 +1,84 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid') }}">home</a></li>
+        </ol>
+    </div>
+    <div class="col-sm-5">
+        <div class="panel">
+            <div class="panel-heading">Créer un Résultat</div>
+            <div class="panel-body">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_row(form.res_type) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.res_title) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.res_sequence) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.grids_points_id) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.res_sort) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.enregistrer, {'attr': {'value': 'créer'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="panel">
+            <div class="panel-heading">List Results</div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Title</th>
+                        <th>Sequence</th>
+                        <th>Grids</th>
+                        <th>Sort</th>
+                    </tr>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.sequence }}</td>
+                            <td>
+                                {% if result.gridsPointsId %}
+                                    <a data-toggle="modal" data-target="#grid{{ result.gridsPointsId }}">
+                                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                                    </a>
+                                    <div class="modal fade" id="grid{{ result.gridsPointsId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>{{ result.sort }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

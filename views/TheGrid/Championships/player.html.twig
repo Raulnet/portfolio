@@ -1,0 +1,44 @@
+{% extends 'TheGrid/layout.html.twig' %}
+
+{% block content %}
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ championship.title }}
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-success btn-xs" href="{{ path('the_grid_edit_lounge', {'id': lounge.id}) }}">edit</a><a class="btn btn-danger btn-xs" href="{{ path('the_grid_delete_lounge', {'id': lounge.id}) }}">delete</a>
+                    </div>
+                </h3>
+            </div>
+            <div class="list-group">
+                {% for player in championshipPlayers %}
+                    <a href="{{ path('the_grid_remove_player_to_championship', {'championshipId': lounge.id, 'playerId': player.id}) }}" class="list-group-item">
+                        <span class="badge">remove</span>
+                        {{ player.nickname }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Player list  <a class="btn btn-info btn-xs pull-right" href="{{ path('the_grid_add_player') }}">+</a></h3>
+            </div>
+            <div class="list-group">
+                {% for player in players %}
+                    {% if player.lounge is defined %}
+                        <a class="list-group-item list-group-item-info">
+                            {{ player.pla_nickname }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('the_grid_add_player_to_championship', {'championshipId': championship.id, 'playerId': player.pla_id}) }}" class="list-group-item">
+                            <span class="badge">add</span>
+                            {{ player.pla_nickname }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

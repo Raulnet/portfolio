@@ -1,0 +1,368 @@
+{% extends "/admin/layout.html.twig" %}
+{% set adminMenu = true %}
+
+{% block title %}Administration{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">{{ block('title') }}</h2>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#articles" data-toggle="tab">Articles</a></li>
+                <li><a href="#comments" data-toggle="tab">Comments</a></li>
+                <li><a href="#users" data-toggle="tab">Users</a></li>
+                <li><a href="#championship" data-toggle="tab">championships</a></li>
+                <li><a href="#players" data-toggle="tab">players</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <!--PANEL ARTICLES ========================================================================================= -->
+        <div class="tab-pane fade in active adminTable" id="articles">
+            {% if articles %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th></th>
+                            <!-- Actions column -->
+                        </tr>
+                        </thead>
+                        {% for article in articles %}
+                            <tr>
+                                <td><a class="articleTitle"
+                                       href="{{ path('article', {'id': article.id }) }}">{{ article.title }}</a></td>
+                                <td>{{ article.content | truncate(60) }}</td>
+                                <td>
+                                    <a href="{{ path('editArticle', {'id': article.id }) }}" class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="articleDialog{{ article.id }}" tabindex="-1"
+                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this article ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="http://127.0.0.1:8080/projects/portfolio/silexMovies/web/admin/article/{{ article.id }}/delete"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No articles found.</div>
+            {% endif %}
+            <a href="{{ path('addArticle') }}">
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article
+                </button>
+            </a>
+        </div>
+        <!-- END PANEL ARTICLES ==================================================================================== -->
+        <!-- PANEL COMMENTS ======================================================================================== -->
+        <div class="tab-pane fade adminTable" id="comments">
+            {% if comments %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th>Author</th>
+                            <th>Content</th>
+                            <th></th>
+                            <!-- Actions column -->
+                        </tr>
+                        </thead>
+                        {% for comment in comments %}
+                            <tr>
+                                <td><a class="articleTitle"
+                                       href="{{ path('article', {'id': comment.article.id }) }}">{{ comment.article.title }}</a>
+                                </td>
+                                <td>{{ comment.author.username }}</td>
+                                <td>{{ comment.content | truncate(60) }}</td>
+                                <td>
+                                    <a href="{{ path('editComment', {'id': comment.id}) }}" class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1"
+                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this comment ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="{{ path('deletComment', {'id': comment.id}) }}"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% for comment in commentsMovies %}
+                            <tr>
+                                <td><a href="{{ path('movie', {'code': comment.codeMovie }) }}">{{ comment.codeMovie }}</a>
+                                </td>
+                                <td>{{ comment.author.username }}</td>
+                                <td>{{ comment.content | truncate(60) }}</td>
+                                <td>
+                                    <a href="{{ path('editComment', {'id': comment.id}) }}" class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1"
+                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this comment ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="{{ path('deletComment', {'id': comment.id}) }}"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No comments found.</div>
+            {% endif %}
+        </div>
+        <!-- END PANEL COMMENTS ==================================================================================== -->
+        <!-- PANEL USERS =========================================================================================== -->
+        <div class="tab-pane fade adminTable" id="users">
+            {% if users %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th></th>
+                            <!-- Actions column -->
+                        </tr>
+                        </thead>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</a></td>
+                                <td>
+                                    {% if user.role == 'ROLE_ADMIN' %}
+                                        Admin
+                                    {% elseif  user.role == 'ROLE_SUPER_ORGANIZER' %}
+                                        Super Organisateur
+                                    {% elseif  user.role == 'ROLE_ORGANIZER' %}
+                                        Organisateur
+                                    {% else %}
+                                        User
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('editUser', {'id':user.id}) }}" class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#userDialog{{ user.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="userDialog{{ user.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this user ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="{{ path('deletUser', {'id':  user.id}) }}"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No users found.</div>
+            {% endif %}
+            <a href="{{ path('addUser') }}">
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add user
+                </button>
+            </a>
+        </div>
+        <!-- END PANEL USERS ======================================================================================= -->
+        <!-- PANEL CHAMPIONSHIPS =================================================================================== -->
+        <div class="tab-pane fade adminTable" id="championship">
+            {% if championships %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>title</th>
+                            <th></th>
+                            <!-- Actions column -->
+                        </tr>
+                        </thead>
+                        {% for championship in championships %}
+                            <tr>
+                                <td>{{ championship.id }}</td>
+                                <td>{{ championship.title }}</td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No championship found.</div>
+            {% endif %}
+            <a href="#">
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>add championship
+                </button>
+            </a>
+        </div>
+        <!-- END PANEL CHAMPIONSHIPS =================================================================================== -->
+        <!-- PANEL PLAYERS ============================================================================================= -->
+        <div class="tab-pane fade adminTable" id="players">
+            {% if players %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nickname</th>
+                            <th>Email</th>
+                            <th>Comment</th>
+                            <th>Support</th>
+                            <th></th>
+                            <!-- Actions column -->
+                        </tr>
+                        </thead>
+                        {% for player in players %}
+                            <tr>
+                                <td>{{ player.id }}</td>
+                                <td>{{ player.nickname }}</td>
+                                <td>{{ player.email }}</td>
+                                <td>{{ player.comment }}</td>
+                                <td>{{ player.support }}</td>
+                                <td>
+                                    <!-- ==== EDIT PLAYER ============================================================== -->
+                                    <a href="{{ path('editLadderPlayer', {'id': player.id, 'roundId': '1'}) }}"
+                                       class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <!-- ==== END EDIT PLAYER ========================================================== -->
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#playerDialog{{ player.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="playerDialog{{ player.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this player <b>{{ player.nickname }}</b> ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="#"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No player found.</div>
+            {% endif %}
+            <a href="#">
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>add player
+                </button>
+            </a>
+        </div>
+        <!-- END PANEL PLAYERS ========================================================================================= -->
+
+    </div>
+{% endblock %}

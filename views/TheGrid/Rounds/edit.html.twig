@@ -1,0 +1,70 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid') }}">home</a></li>
+            <li><a href="{{ path('the_grid_show_championship', {'id': breadcrumb.championship_id}) }}">{{ breadcrumb.championship_title }}</a></li>
+            <li><a href="{{ path('the_grid_show_stage', {'id': breadcrumb.stage_id}) }}">{{ breadcrumb.stage_title }}</a></li>
+            <li class="active">edit {{ round.title }}</li>
+        </ol>
+    </div>
+    <div class="col-sm-5 well">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.rou_title) }}
+            {{ form_widget(form.rou_title) }}
+            {{ form_errors(form.rou_title) }}
+        </div>
+        <div class="form-group">
+            <a class="btn btn-default pull-right" href="{{ path('the_grid_show_stage', {'id': breadcrumb.stage_id}) }}">Annuler</a>
+            {{ form_row(form.enregistrer) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="col-sm-6">
+        <div class="panel">
+            <div class="panel-heading">Rounds</div>
+            <table class="table">
+                <tr>
+                    <th class="col-xs-6">Titles</th>
+                    <th class="col-xs-2 action">Edit</th>
+                    <th class="col-xs-2 action">Delet</th>
+                </tr>
+                {% for round in rounds %}
+                    <tr>
+                        <td>{{ round.title }}</td>
+                        <td class="action">
+                            <a href="{{ path('the_grid_edit_round', {'id': round.id}) }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+                        </td>
+                        <td class="action">
+                            <a type="button" data-toggle="modal" data-target="#delete_round_{{ round.id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        </td>
+                        <div class="modal fade" id="delete_round_{{ round.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ round.title }}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Supprimer {{ round.title }} ?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Attention vous allez supprimer {{ round.title }} !<br />
+                                        Ainsi que les resultats lié !<br />
+                                        Confirmer ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a class="btn btn-danger" href="{{ path('the_grid_delete_round', {'id': round.id}) }}">Confirmer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

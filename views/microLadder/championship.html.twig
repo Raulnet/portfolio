@@ -1,0 +1,133 @@
+{% extends "/microLadder/layout.html.twig" %}
+
+{% block title %}{{ championship.title }}{% endblock %}
+{# ===== SET BODY BACKGROUND ======================================================================================== #}
+{% if championship.id == 1 %}
+    {% set game = 'nfs' %}
+{% elseif championship.id == 2 %}
+    {% set game = 'pcars' %}
+{% elseif championship.id == 8 %}
+    {% set game = 'beer' %}
+{% endif %}
+{# ===== END SET BODU BACKGROUND ==================================================================================== #}
+
+{% block content %}
+
+    <div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('micro-ladder') }}">Home</a></li>
+            <li>{{ championship.title }}</li>
+        </ol>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ championship.title }} {{ 'ranking'|trans }}</div>
+            <div class="panel-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                                  data-toggle="tab">General</a></li>
+                        {% for round in rounds %}
+                            <li role="round"><a href="#{{ round.id }}" aria-controls="{{ round.title }}" role="tab"
+                                                data-toggle="tab">{{ round.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <br/>
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ 'players'|trans }}</th>
+                                    <th>chrono</th>
+                                    <th>round</th>
+                                </tr>
+                                {% for topResult in topResults %}
+                                    <tr class="playerSelect{{ topResult.player.id }}"><!-- ==== define the class for JS function tagPlayer -->
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ topResult.player.nickname }}</td>
+                                        <td>{{ topResult.stringResult }}</td>
+                                        <td>{{ topResult.round }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        {% for round in rounds %}
+                            <div role="tabpanel" class="tab-pane" id="{{ round.id }}">
+                                <br/>
+                                <table class="table">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ 'players'|trans }}</th>
+                                        <th>timing</th>
+                                    </tr>
+                                    {% for result in results %}
+                                        {% if result.round == round.title %}
+                                            <tr class="playerSelect{{ result.player.id }}"> <!-- ==== define the class for JS function tagPlayer -->
+                                                <td>{{ loop.index }}</td>
+                                                <td>{{ result.player.nickname }}</td>
+                                                <td>{{ result.stringResult }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if app.security.token and is_granted('ROLE_ADMIN') %}
+        {# ===== PANEL ROUND FOR ADMIN ============================================================================== #}
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">Round ({{ rounds|length }})</div>
+                <div class="panel-body">
+                    <table class="table">
+                        {% for round in rounds %}
+                            <tr>
+                                <td><a href="{{ path('round', {'id': round.id}) }}">{{ round.title }}</a></td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        {# ===== END PANEL ROUND FOR ADMIN ========================================================================== #}
+    {% endif %}
+        {# ===== PANEL PLAYERS ====================================================================================== #}
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading"><b>{{ 'players'|trans }} ({{ players|length }})</b></div>
+                <div class="panel-body">
+                    <table class="table">
+                        {% for player in players %}
+                            <tr
+                                    class="playerSelect{{ player.id }}"
+                                    id="playerSelect{{ player.id }}"
+                                    onclick="tagPlayer(this.id)"
+                            ><!-- ==== define the class for JS function tagPlayer ================================== -->
+                            <!-- ==== define the id for JS function Button identification ========================== -->
+                            <!-- ==== define methode onclick to launch function tagPlayer ========================== -->
+                                <td><b>{{ player.nickname }}</b></td>
+                                <td>
+
+
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        {# ===== END PANEL PLAYER =================================================================================== #}
+
+{% endblock %}

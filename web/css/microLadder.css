@@ -1,0 +1,90 @@
+/* ***** BODY BACKGROUND ******************************************************************************************** */
+.index {
+    background-image: url("../assets/welcome-img.jpg");
+}
+
+.nfs {
+    background-image: url("../assets/Need-for-Speed-Rivals-HD-Wallpaper.jpg");
+
+}
+
+.pcars {
+    background-image: url("../assets/p_cars.jpg");
+}
+
+.beer {
+    background-image: url("../assets/afficheThibault.jpg");
+}
+
+/* ***** END BODY BACKGROUND **************************************************************************************** */
+
+/* ***** BREADCRUMB DESIGN ****************************************************************************************** */
+.breadcrumb {
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(70%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=1); /* IE6-9 */
+}
+
+.breadcrumb a {
+    color: cornflowerblue;
+}
+
+.breadcrumb a:hover {
+    color: royalblue;
+}
+
+/* ***** END BREADCRUMB DESIGN ************************************************************************************** */
+
+/* ***** PANEL DESIGN *********************************************************************************************** */
+.panel {
+    background-color: rgba(25, 25, 50, 0.6);
+    box-shadow: 1px 1px 10px #000100;
+}
+
+.panel-body {
+    color: rgb(225, 225, 225);
+}
+
+.panel-heading {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: darkslategray;
+    font-weight: bold;
+}
+
+/* ***** END PANEL DESIGN ******************************************************************************************* */
+
+.modal-content {
+    color: darkslategray;
+}
+
+.addUser {
+    color: cornflowerblue;
+}
+
+.addUser:hover {
+    color: royalblue;
+}
+
+table tr:nth-child(2n+2) {
+    background-color: rgba(50, 50, 75, 0.5);
+}
+
+.playerSelected {
+    background-color: rgba(50, 100, 255, 0.5) !important;
+
+}
+
+a {
+    font-weight: bolder;
+    color: rgb(200, 200, 225);
+}
+
+a:hover {
+    color: royalblue;
+}
+
+

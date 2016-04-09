@@ -1,0 +1,217 @@
+/* ***** BODY BACKGROUND ******************************************************************************************** */
+.index {
+    background-image: url("../assets/welcome-img.jpg");
+}
+
+.nfs {
+    background-image: url("../assets/Need-for-Speed-Rivals-HD-Wallpaper.jpg");
+
+}
+
+.pcars {
+    background-image: url("../assets/p_cars.jpg");
+}
+
+.beer {
+    background-image: url("../assets/afficheThibault.jpg");
+}
+
+/* ***** END BODY BACKGROUND **************************************************************************************** */
+/* ***** MESSAGE **************************************************************************************************** */
+
+.alert {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    padding: 15px;
+    margin-left: -15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 1px 1px 10px #000100;
+}
+
+.alert-dismissable,
+.alert-dismissible {
+    padding-right: 35px;
+}
+
+.alert-danger {
+    color: #fdfbff;
+    background-color: #f22625;
+    border-color: #ebccd1;
+}
+
+.turn-off{
+    border: none;
+    background-color: transparent;
+}
+
+/* ***** BREADCRUMB DESIGN ****************************************************************************************** */
+.breadcrumb {
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(70%, rgba(255, 255, 255, 0.5)), color-stop(100%, rgba(255, 255, 255, 0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%, rgba(255, 255, 255, 0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=1); /* IE6-9 */
+}
+
+.breadcrumb a {
+    color: cornflowerblue;
+}
+
+.breadcrumb a:hover {
+    color: royalblue;
+}
+/* ***** END BREADCRUMB DESIGN ************************************************************************************** */
+
+/* ***** FORM ******************************************************************************************************* */
+label{
+    color: #c6c6c6;
+}
+
+.well {
+    margin: 0px 15px 0px 15px;
+    min-height: 20px;
+    padding: 19px;
+    background-color: rgba(25, 25, 50, 0.6);
+    box-shadow: 1px 1px 10px #000100;
+    border: 1px solid #383857;
+    border-radius: 4px;
+}
+
+table .form-group{
+    margin-bottom: 0px!important;
+}
+/* ***** ./FORM ***** */
+
+/* ***** PANEL DESIGN *********************************************************************************************** */
+.panel {
+    background-color: rgba(25, 25, 50, 0.6);
+    box-shadow: 1px 1px 10px #000100;
+}
+
+.panel-body {
+    color: rgb(225, 225, 225);
+}
+
+.panel-heading {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: darkslategray;
+    font-weight: bold;
+}
+
+.panel-heading a {
+    color: rgb(76, 77, 106);;
+}
+
+.panel-footer{
+    background-color: rgba(25, 25, 50, 0.6);
+}
+
+.panel a{
+    text-decoration: none;
+}
+
+.disabled{
+    color: rgba(25, 25, 50, 0.6)!important;
+}
+
+.divider{
+    height: 15px;
+}
+
+.panel .list-group-item{
+    color: #ffffff;
+    background-color: rgba(25, 25, 50, 0.6);
+}
+
+.panel .list-group-item:nth-child(odd){
+    background-color: rgba(50, 50, 75, 0.5);
+}
+
+.panel .list-group-item:hover{
+    color: #ffffff;
+    background-color: rgba(44, 42, 80, 0.60);
+}
+/* ***** END PANEL DESIGN ******************************************************************************************* */
+
+/* ***** TABLE ****************************************************************************************************** */
+table tr:nth-child(odd) {
+    background-color: rgba(50, 50, 75, 0.5);
+}
+
+.result_false{
+    background-color: rgba(101, 7, 10, 0.50);
+}
+.result_false:nth-child(odd){
+    background-color: rgba(153, 17, 20, 0.50);
+}
+table{
+    color: #ffffff;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #0d162b;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    border-bottom: 1px solid #46afff;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+    z-index: 2;
+    color: #fff!important;
+    background-color: #337ab7!important;
+    border-color: #46afff!important;
+
+}
+
+table .action{
+    text-align: center;
+}
+
+.panel table{
+    border-bottom: double 4px #c6c6c6;
+}
+
+.panel table:last-child{
+    border-bottom: none;
+}
+/* ***** ./TABLE **************************************************************************************************** */
+.modal-content {
+    color: darkslategray;
+}
+
+.addUser {
+    color: cornflowerblue;
+}
+
+.addUser:hover {
+    color: royalblue;
+}
+
+.playerSelected {
+    background-color: rgba(50, 100, 255, 0.5) !important;
+
+}
+
+a {
+    font-weight: 500;
+    color: rgb(200, 200, 225);
+}
+
+a:hover {
+    color: royalblue;
+}
+
+
+
+

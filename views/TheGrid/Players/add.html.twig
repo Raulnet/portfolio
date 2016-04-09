@@ -1,0 +1,56 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid_championships') }}">{{ 'championships'|trans }}</a></li>
+            <li><a href="{{ path('the_grid_players') }}">{{ 'players'|trans }}</a></li>
+            <li class="active">add players
+            <li>
+        </ol>
+    </div>
+
+    <div class="col-sm-5 well">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.pla_nickname) }}
+            {{ form_widget(form.pla_nickname) }}
+            {{ form_errors(form.pla_nickname) }}
+        </div>
+        <div class="form-group">
+            <a class="btn btn-default pull-right" href="{{ path('the_grid_players') }}">annuler</a>
+            {{ form_row(form.enregistrer) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Players ({{ players|length }})
+                <a class="pull-right" href="{{ path('the_grid_add_player') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add</a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Email</th>
+                    <th>Support</th>
+                    <th></th>
+                    <th class="action">Action</th>
+                </tr>
+                </thead>
+                {% for player in players %}
+                    <tr>
+                        <td>{{ player.nickname }}</td>
+                        <td>{{ player.mail }}</td>
+                        <td>{{ player.support }}</td>
+                        <td></td>
+                        <td class="action"><a href="{{ path('the_grid_edit_player', {'id': player.id}) }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

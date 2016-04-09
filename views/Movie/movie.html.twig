@@ -1,0 +1,88 @@
+{% extends "/Movie/layout.html.twig" %}
+
+{% block title %}{{ movie.title|convert_encoding('UTF-8', 'iso-8859-1') }}{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('silex-movie') }}">Home</a></li>
+        <li> movie</li>
+        <li>{{ movie.title }} </li>
+    </ol>
+
+    <div class="col-md-4 poster">
+        <img class="img-responsive img-thumbnail" src="{{ movie.poster }}">
+    </div>
+
+    <div class="col-md-8 dataMovie">
+        <h2>{{ movie.title|convert_encoding('UTF-8', 'iso-8859-1') }}</h2>
+
+        <p><b>Résalisateur :</b>
+            {% for member in movie.castMember %}
+                {% if member.activity.code == 8002 %}
+                    <a href="{{ path('person', {'code': member.person.code}) }}">{{ member.person.name|convert_encoding('UTF-8', 'iso-8859-1')~' ' }}</a>
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p><b>Acteurs :</b>
+            {% for member in movie.castMember %}
+                {% if member.activity.code == 8001 %}
+                    <a href="{{ path('person', {'code': member.person.code}) }}">
+                        {{ member.person.name|convert_encoding('UTF-8', 'iso-8859-1') }}
+                        {% if loop.index < movie.castMember|length %}
+                            {{ ', ' }}
+                        {% endif %}</a>
+                {% endif %}
+            {% endfor %}
+        </p>
+        {% if movie.synopsis is defined %}
+            <p><b>Synopsis :</b>{{ movie.synopsis|convert_encoding('UTF-8', 'iso-8859-1')|raw }}</p>
+            {{ movie.trailerEmbed|convert_encoding('UTF-8', 'iso-8859-1')|raw }}
+        {% endif %}
+    </div>
+    <div class="col-md-12 well">
+        <h3>Comments</h3>
+        <table class="table table-striped">
+            {% for comment in comments %}
+                <tr>
+                    <th>{{ comment.author.username }}<br/>
+                    </th>
+                    <td>{{ comment.content }}</td>
+                    <td>
+                        {{ comment.date|date('Y-m-d') }}<br/>
+                        {{ comment.date|date('H:i') }}
+                    </td>
+                </tr>
+            {% else %}
+                No comments yet.
+            {% endfor %}
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Add a comment</h3>
+            {% if commentForm %}
+                {{ form_start(commentForm) }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    {{ form_errors(commentForm.content) }}
+                    {{ form_widget(commentForm.content, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Enter your comment' }}) }}
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Publish comment"/>
+                </div>
+                {{ form_end(commentForm) }}
+
+            {% else %}
+                <a href="{{ path('login') }} ">Log in</a> to add comments.
+            {% endif %}
+            </p>
+        </div>
+    </div>
+{% endblock %}

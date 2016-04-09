@@ -1,0 +1,41 @@
+{% extends 'TheGrid/layout.html.twig' %}
+
+{% set game = 'index' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li>Home</li>
+            </ol>
+        </div>
+        {# ***** TABLE CHAMPIONSHIPS **** #}
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-heading">{{ 'championships'|trans }} {% if is_granted('ROLE_ORGANIZER') %}<a class="pull-right" href="{{ path('the_grid_add_championships') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add</a>{% endif %}</div>
+                <div class="list-group">
+                    {% if championships is defined %}
+                        {% for champ in championships %}
+                            <a class="list-group-item" href="{{ path('the_grid_show_championship', {'id': champ.id}) }}">{{ champ.title }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {# ***** ./TABLE CHAMPIONSHIPS **** #}
+        {# ***** TABLE PLAYERS **** #}
+        <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-heading"><a href="{{ path('the_grid_players') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ 'players'|trans }}</a>  {% if is_granted('ROLE_ORGANIZER') %}<a class="pull-right" href="{{ path('the_grid_add_player') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add</a>{% endif %}</div>
+                <table class="table table-hover">
+                    {% for player in players %}
+                        <tr>
+                            <td>{{ player.nickname }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {# ***** ./TABLE PLAYERS **** #}
+    </div>
+{% endblock %}

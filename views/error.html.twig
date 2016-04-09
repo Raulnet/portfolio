@@ -1,0 +1,17 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Error!{% endblock %}
+{% set error = true %}
+{% block content %}
+    <div class="error">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Whoops...<br>
+                        <small>{{ message }}</small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

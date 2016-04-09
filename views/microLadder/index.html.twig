@@ -1,0 +1,53 @@
+{% extends "/microLadder/layout.html.twig" %}
+{% set game = 'index' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li>Home</li>
+            </ol>
+        </div>
+        <!-- ===== TABLE CHAMPIONSHIPS ============================================================================= -->
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-heading">{{ 'championships'|trans }}</div>
+                <div class="panel-body">
+                    {% if championships is defined %}
+                        <table class="table">
+                            <tr>
+                                <th>title</th>
+                            </tr>
+                            {% for champ in championships %}
+                                <tr>
+                                    <td><a href="{{ path('championship', {'id': champ.id}) }}">{{ champ.title }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- ===== END TABLE CHAMPIONSHIPS ========================================================================= -->
+        <!-- ===== TABLE PLAYERS =================================================================================== -->
+        <div class="col-md-4">
+            <div class="panel">
+                <div class="panel-heading">{{ 'players'|trans }}</div>
+                <div class="panel-body">
+                    {% if players is defined %}
+                        <table class="table">
+                            <tr>
+                                <th>nickname</th>
+                            </tr>
+                            {% for player in players %}
+                                <tr>
+                                    <td>{{ player.nickname }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- ===== END TABLE PLAYERS =============================================================================== -->
+    </div>
+{% endblock %}

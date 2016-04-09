@@ -1,0 +1,42 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('the_grid_championships') }}">home</a></li>
+        <li><a href="{{ path('the_grid_show_championship', {'id': breadcrumbs.championship_id}) }}">{{ breadcrumbs.championship_title }}</a></li>
+        <li><a href="{{ path('the_grid_show_stage', {'id': breadcrumbs.stage_id}) }}">{{ breadcrumbs.stage_title }}</a></li>
+        <li><a href="{{ path('the_grid_show_lounge', {'id': breadcrumbs.lounge_id}) }}">{{ breadcrumbs.lounge_title }}</a></li>
+    </ol>
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ lounge.title }}</h3>
+        </div>
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <th>Players</th>
+                {% for round in rounds %}
+                        <th>{{ round.round_title }}</th>
+                        <th class="action">Points</th>
+                {% endfor %}
+            </tr>
+            {{ form_start(form) }}
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.nickname }}</td>
+                    {% for round in rounds %}
+                        <td>{{ form_widget(form['result_'~player.id~'_'~round.round_id~'_'~result.result_id~'_'~result.sequence]) }}</td>
+                        <td class="action">
+                            {% if grid[player.id~'_'~round.round_id~'_'~result.result_id~'_'~result.sequence] is defined %}
+                                {{ grid[player.id~'_'~round.round_id~'_'~result.result_id~'_'~result.sequence]['value'] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="panel-footer"><a href="{{ path('the_grid_show_stage', {'id': lounge.stageId}) }}" class="btn btn-default pull-right">retour</a> {{ form_row(form.valider, {'attr': {'class': 'btn btn-success'}}) }} {{ form_end(form) }}</div>
+    </div>
+{% endblock %}

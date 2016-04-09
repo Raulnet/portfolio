@@ -1,0 +1,169 @@
+{% extends "/microLadder/layout.html.twig" %}
+
+{# ===== SET BODY BACKGROUND ======================================================================================== #}
+{% if round.championship.id == 4 %}
+    {% set game = 'nfs' %}
+{% elseif round.championship.id == 5 %}
+    {% set game = 'pcars' %}
+{% elseif round.championship.id == 8 %}
+    {% set game = 'beer' %}
+{% else %}
+    {% set game = 'index' %}
+{% endif %}
+{# ===== END SET BODU BACKGROUND ==================================================================================== #}
+
+{% block content %}
+    <div class="row">
+    <!-- ===== BREADCRUMB ========================================================================================= -->
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('micro-ladder') }}">Home</a></li>
+            <li><a href="{{ path('championship', {'id': round.championship.id}) }}">{{ round.championship.title }}</a>
+            </li>
+            <li>{{ round.title }}</li>
+        </ol>
+    </div>
+    <!-- ===== END BREADCRUMB ====================================================================================== -->
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="col-md-12 ">
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <!-- ===== PANEL ROUND ========================================================================================= -->
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ round.title }}</div>
+            <div class="panel-body">
+                <div role="tabpanel">
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>chrono</th>
+                            <th></th>
+                        </tr>
+                        {% for result in results %}
+                            <tr class="playerSelect{{ result.player.id }}">
+                                <td>{{ loop.index }}</td>
+                                <td>{{ result.player.nickname }}</td>
+                                <td>{{ result.stringResult }}</td>
+                                <td><!-- ===== BUTTON EDIT RESULT ================================================== -->
+                                    <a href="{{ path('editLadderResult', {'resultId': result.id  }) }}"
+                                       class="btn btn-primary btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-time"></span></a>
+                                    <!-- ===== END BUTTON EDIT RESULT ============================================== -->
+                                    <!-- ===== BUTTON DELET RESULT ================================================= -->
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#resultDialog{{ result.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <!-- ===== END BUTTON DELET RESULT ============================================= -->
+                                    <!-- ===== START MODAL RESULT ================================================== -->
+                                    <div class="modal fade" id="resultDialog{{ result.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this result
+                                                    <b>{{ result.stringResult }}</b> of
+                                                    <b>{{ result.player.nickname }}</b> ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="{{ path('deletResult', {'resultId': result.id, 'roundId': round.id }) }}"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ===== END MODAL RESULT ==================================================== -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END PANEL ROUND ===================================================================================== -->
+    <!-- ===== PANEL USER ========================================================================================== -->
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">All Player Registered<span class="pull-right"><b><a class="addUser"
+                                                                                           href="{{ path('addLadderPlayer', {'roundId': round.id }) }}">+ Add</a></b></span>
+            </div>
+            <div class="panel-body">
+                <div role="tabpanel">
+                    <table class="table">
+                        {% for player in players %}
+                            <tr class="playerSelect{{ player.id }}">
+                                <td>
+                                    {{ player.nickname }}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-xs" href="{{ path('addLadderResult', {'playerId': player.id, 'roundId': round.id}) }}"><span class="glyphicon glyphicon-time">
+                                           </span></a>
+                                    <!-- ===== PLAYER SELECTED ===================================================== -->
+                                    <button class="btn btn-success btn-xs" title="Tag"
+                                            id="playerSelect{{ player.id }}"
+                                            onclick="tagPlayer(this.id)"
+                                            >
+                                           <span class="glyphicon glyphicon-zoom-in">
+                                           </span>
+                                    </button>
+                                    <!-- ===== END PLAYER SELECTED ================================================= -->
+                                    <!-- ===== PLAYER EDITION ====================================================== -->
+                                    <a href="{{ path('editLadderPlayer', {'id': player.id, 'roundId': round.id}) }}"
+                                       class="btn btn-info btn-xs"
+                                       title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <!-- ===== END PLAYER EDITION ================================================== -->
+                                    <!-- ===== PLAYER DELET ======================================================== -->
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete"
+                                            data-toggle="modal" data-target="#playerDialog{{ player.id }}"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <!-- ===== END PLAYER DELET ==================================================== -->
+                                    <div class="modal fade" id="playerDialog{{ player.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really want to delete this player
+                                                    <b>{{ player.nickname }}</b> ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a href="{{ path('deletPlayer', {'playerId': player.id, 'roundId': round.id}) }}"
+                                                       class="btn btn-danger">Confirm</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END PANEL USER ====================================================================================== -->
+    <!-- END ROW =================================================================================================== -->
+
+{% endblock %}

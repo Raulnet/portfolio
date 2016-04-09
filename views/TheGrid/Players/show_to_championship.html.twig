@@ -1,0 +1,44 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid') }}">home</a></li>
+            <li><a href="{{ path('the_grid_show_championship', {'id': championship.id}) }}">{{ championship.title }}</a></li>
+            <li>add players</li>
+        </ol>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">List Players to championship</div>
+            <div class="list-group">
+                {% for player in players %}
+                    {% if player.championship_id == championship.id %}
+                        <a href="{{ path('the_grid_remove_player_to_championship', {'championshipId': championship.id, 'playerId': player.pla_id}) }}" class="list-group-item">
+                            {{ player.pla_nickname }} <span class="badge">remove</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">List Players</div>
+            <div class="list-group">
+                {% for player in players %}
+                    {% if player.championship_id == championship.id %}
+                        <a class="list-group-item active">
+                            {{ player.pla_nickname }} <span class="badge">added</span>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('the_grid_add_player_to_championship', {'championshipId': championship.id, 'playerId': player.pla_id}) }}" class="list-group-item">
+                            {{ player.pla_nickname }} <span class="badge">add</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

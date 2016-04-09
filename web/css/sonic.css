@@ -1,0 +1,32 @@
+.theGround {
+    height: 128px;
+    width: 128px;
+    position: absolute;
+    background-image: url("../img/theGround.png");
+}
+
+#heros {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    background-image: url("../img/sonic3.png");
+    background-position: 0px 0px;
+    top: 300px;
+    left: 40%;
+}
+
+.vanish {
+
+    top: 128px;
+}
+
+.sea {
+    background-position: 0px -256px;
+    top: 256px;
+}
+
+.road {
+    background-position: -384px -384px;
+    top: 256px;
+}
+

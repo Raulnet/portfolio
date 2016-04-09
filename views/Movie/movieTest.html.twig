@@ -1,0 +1,12 @@
+{% extends "\Movie\layout.html.twig" %}
+
+{% block title %}Page test{% endblock %}
+
+{% block content %}
+
+    <h2>PageTest</h2>
+    {% if slider is defined %}
+        {% include "slider.html.twig" %}
+    {% endif %}
+
+{% endblock %}

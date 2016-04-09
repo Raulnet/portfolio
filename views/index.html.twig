@@ -1,0 +1,618 @@
+{% extends "layout.html.twig" %}
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+    <!-- Navigation Bar -->
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img class="logo"
+                                                      src="{{ app.request.basepath }}/assets/raulnet_logo.png"
+                                                      alt=""></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <nav id="my-nav" class="navbar-collapse collapse" role="navigation">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="#welcome">Home</a></li>
+                    <li><a href="#portfolio">Projets</a></li>
+                    <li><a href="#testimonials">Parcours</a></li>
+                    <li><a href="#profile">profile</a></li>
+                    <li><a href="#technologie">Technologie</a></li>
+                    <li><a href="#blog">divers</a></li>
+                    <li class="active"><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-home"></span> Raulnet <b class="caret"></b></a>
+                        <ul class="dropdown-menu" style="background-color: transparent">
+                            <li><a style="color: orangered" href="{{ path('home') }}"><span
+                                            class="glyphicon glyphicon-home"></span>
+                                    Portfolio</a></li>
+                            <li><a style="color: orangered" href="{{ path('silex-movie') }}"><span
+                                            class="glyphicon glyphicon-film"></span> Silex
+                                    Movie</a></li>
+                            <li><a style="color: orangered" href="{{ path('micro-ladder') }}"><span
+                                            class="glyphicon glyphicon-list-alt"></span>
+                                    Micro Ladder</a></li>
+                            <li><a style="color: orangered" href="{{ path('the_grid') }}"><span class="glyphicon glyphicon-list-alt"></span>
+                                The Grid</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!--/.navbar-collapse -->
+        </div>
+    </div>
+    <!-- End of Navigation Bar -->
+    <!-- Welcome Section -->
+    <section id="welcome" class="parallax welcome-section photo-section dark-section light-content parallax">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="welcome-content">
+                    <h1 class="special-heading light-special">{{ "{{ Raulnet }}" }}</h1>
+
+                    <p>
+                        <span>Tout problème a une solution !</span>
+                        <span class="rotating-words">Et s'il n'y a pas de solution ?, Alors nous ne somme pas en face d'un problème .</span>
+                    </p>
+
+                    <div class="social-icons light-icons">
+                        <a href="https://www.facebook.com/laurent.negre.50"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/Slider016"><i class="fa fa-twitter"></i></a>
+                        <a href="https://github.com/Raulnet"><i class="fa fa-github"></i></a>
+                        <a href="https://plus.google.com/u/0/108391641836735543554/posts"><i
+                                    class="fa fa-google-plus"></i></a>
+                    </div>
+                    <div class="scroll-more">
+                        <span>Scroll down</span>
+                        <i class="scroll-arrow"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Welcome Section -->
+
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section light-section dark-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="special-heading dark-special">{{ "{{ Mes projets }}" }}</h1>
+
+                    <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore.</p>
+                </div>
+            </div>
+
+            <div class="filter-bar clearfix">
+                <ul class="filter-list">
+                    <li class="filter btn btn-medium btn-darkblue btn-outline active" data-id="all">All</li>
+                    <li class="filter btn btn-medium btn-darkblue btn-outline" data-id="silex">Silex</li>
+                    <li class="filter btn btn-medium btn-darkblue btn-outline" data-id="symfony2">Symfony2</li>
+                    <li class="filter btn btn-medium btn-darkblue btn-outline" data-id="twig">Twig</li>
+                    <li class="filter btn btn-medium btn-darkblue btn-outline" data-id="wordpress">WordPress</li>
+                    <li class="filter btn btn-medium btn-darkblue btn-outline" data-id="joomla">Joomla</li>
+                </ul>
+                <a href="#" class="more-work btn btn-medium btn-darkblue btn-outline">All my work</a>
+            </div>
+            <div class="main">
+                <ul id="og-grid" class="og-grid">
+                    <li class="portfolio-item visible-item" data-id="silex twig">
+                        <a href="https://github.com/Raulnet/portfolio/tree/master"
+                           data-largesrc="{{ app.request.basepath }}/assets/portfolio.jpg"
+                           data-category="silex - twig" data-date="Nov 10th, 2014" data-title="Portfolio"
+                           data-description="Mon portfolio, construit avec Silex, twig et bootstrap, code source sur <i class='fa fa-github'></i> github on Read More ">
+                            <img src="{{ app.request.basepath }}/assets/portfolio.jpg" alt="rolnet - Portfolio"/>
+
+                            <div class="overlay-content">
+                                <h4>Portfolio - Silex</h4>
+
+                                <p>Une première approche avec silex, et une intégration simple avec twig</p>
+
+                                <p></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="portfolio-item visible-item" data-id="symfony2 twig">
+                        <a href="http://symfony.3wa.fr/"
+                           data-largesrc="{{ app.request.basepath }}/assets/symfony-cinema.jpg"
+                           data-category="Symfony 2"
+                           data-date="Nov 10th, 2014"
+                           data-title="Symfony2 - Movies Website"
+                           data-description="<p>Site développer lors de la formation <a href='http://symfony.3wa.fr/'>symfony 2</a> </p>
+					<h4>Features:</h4>
+					<ul>
+                        <li>symfony2</li>
+                        <li>Service Container</li>
+                        <li>doctrine ORM</li>
+                        <li>TWIG</li>
+                        <li>elastcSearch</li>
+                        <li>paybox</li>
+					</ul>">
+                            <img src="{{ app.request.basepath }}/assets/symfony-cinema.jpg"
+                                 alt="Business Card Mockups - pack 2"/>
+
+                            <div class="overlay-content">
+                                <h4>Projet 3WA sur Symfony2</h4>
+
+                                <p>Site développer lors de la formation symfony 2 </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="portfolio-item visible-item" data-id="silex twig">
+                        <a href="{{ path('silex-movie') }}"
+                           data-largesrc="{{ app.request.basepath }}/assets/silex-cinema.jpg"
+                           data-category="Silex website"
+                           data-date="11 3th, 2015"
+                           data-title="Silex - Movies"
+                           data-description="<p>Micro site avec Silex alimenter par l'api Allociné . La bdd n'est utiliser que pour les utilisateur et les commentaire, tous les films viennent de l'api allociné.
+                       néanmoins l'intégralité des requête on était refaites. afin de mieux coller à l'architecture du site POO MVC et aussi pourvoir créer de nouvelle requête, comme la selection des film par catégorie.</p>
+                       <h4>Features:</h4>
+                            <ul>
+                                <li>silex</li>
+                                <li>pimple</li>
+                                <li>doctrine2</li>
+                                <li>TWIG</li>
+                                <li>swiftMailer</li>
+                                <li>Api Allo Ciné</li>
+                                <li>etc...</li>
+                            </ul>
+					">
+                            <img src="{{ app.request.basepath }}/assets/silex-cinema.jpg" alt="websiteSilex-movies"/>
+
+                            <div class="overlay-content">
+                                <h4>Silex - Cinema</h4>
+
+                                <p>Micro projet sous Silex, alimenter par l'api allo ciné, dont les requête on était
+                                    redéssiner pour allimenter le site.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="portfolio-item visible-item" data-id="silex twig">
+                        <a href="{{ path('micro-ladder') }}"
+                           data-largesrc="{{ app.request.basepath }}/assets/micro-ladder.jpg"
+                           data-category="Silex website"
+                           data-date="11 3th, 2015"
+                           data-title="Micro-Ladder"
+                           data-description="<p>Micro Ladder <b>en construction!!!</b>, pour la gestion des concours lors de la Gamers Assembly 2015.</p>
+                               <h4>Features:</h4>
+                                    <ul>
+                                        <li>silex</li>
+                                        <li>pimple</li>
+                                        <li>doctrine2</li>
+                                        <li>TWIG</li>
+                                        <li>swiftMailer</li>
+                                        <li>etc...</li>
+                                    </ul>
+					    ">
+                            <img src="{{ app.request.basepath }}/assets/micro-ladder.jpg" alt="websiteSilex-movies"/>
+
+                            <div class="overlay-content">
+                                <h4>Micro-Ladder</h4>
+
+                                <p>Micro Ladder, pour la gestion de concours lors de la Gamers Assembly 2015.</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End of Portfolio Section -->
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="parallax testimonials-section photo-section dark-section light-content">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="welcome-content">
+                    <h2 class="special-heading light-special">{{ "{{ parcours }}" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div style="height: 360px;
+         position: relative;
+         ">
+            <script src="{{ app.request.basepath }}/js/sonic.js"></script>
+        </div>
+        <div class="content-wrapper">
+            <div class="container">
+                <article>
+                    <p class=" special-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                        consequatur dolor
+                        dolorem fugit iure neque voluptatibus. Aliquam asperiores deleniti, dicta, ducimus esse
+                        exercitationem magnam qui tenetur voluptas voluptate voluptates?</p>
+
+                    <p class=" special-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                        consequatur dolor
+                        dolorem fugit iure
+                        neque voluptatibus. Aliquam asperiores deleniti, dicta, ducimus esse exercitationem magnam qui
+                        tenetur voluptas voluptate voluptates?</p>
+
+                    <p class=" special-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab
+                        consequatur dolor dolorem fugit iure
+                        neque voluptatibus. Aliquam asperiores deleniti, dicta, ducimus esse exercitationem magnam qui
+                        tenetur voluptas voluptate voluptates?</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- End of Testimonials Section -->
+    <!-- Team Section -->
+    <section id="profile" class="team-section light-section dark-content">
+        <div class="container">
+            <h2 class="special-heading dark-special">{{ "{{ profile }}" }}</h2>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="team-member">
+                        <div class="profile-picture">
+                            <figure><img src="{{ app.request.basepath }}/assets/profile.jpg" alt=""></figure>
+                            <div class="profile-overlay"></div>
+                            <div class="profile-social">
+                                <div class="icons-wrapper">
+                                    <a href="https://www.facebook.com/laurent.negre.50"><i
+                                                class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/Slider016"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://github.com/Raulnet"><i class="fa fa-github"></i></a>
+                                    <a href="https://plus.google.com/u/0/108391641836735543554/posts"><i
+                                                class="fa fa-google-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Raulnet</h3>
+                        <span>Technico Manager</span>
+
+                        <div class="team-bio">
+                            <p>35 ans, aime les nouvelles Technologies, l'algorythmique, les Voyages, mais pas
+                                l'orthographe !!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Team Section -->
+    <!-- Services Section -->
+    <section id="technologie" class="parallax services-section photo-section dark-section light-content">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <h1 class="special-heading light-special">{{ "{{ Technologie }}" }}</h1>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="service-col">
+                        <div class="service-icon">
+                            <img class="img-responsive"
+                                 src="http://blog.reddikh.com/wp-content/uploads/2013/04/symfony-logo.png">
+                        </div>
+                        <h2><a href="#">Symfony 2/3</a></h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias deserunt dolorem ipsa ipsam
+                            minima, molestiae nesciunt quam, quas quibusdam, quis sapiente temporibus velit veniam.
+                            Doloremque et fuga nostrum vero voluptatem?.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-col">
+                        <div class="service-icon">
+
+                            <img class="img-responsive"
+                                 src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/01/1422282806logo-silex.png">
+
+                        </div>
+                        <h2><a href="#">Silex</a></h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab debitis incidunt, nihil
+                            repellendus sapiente tenetur totam. Assumenda distinctio nesciunt voluptatum. Eveniet
+                            incidunt labore laboriosam minus non, quidem repellendus similique veniam?</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-col">
+                        <div class="service-icon">
+
+                            <img class="img-responsive"
+                                 src="http://www.novactive.ca/bundles/novactiveus/images/technologies/php-fpm-logo.png">
+
+                        </div>
+                        <h2><a href="#">PHP5/7</a></h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla perspiciatis, placeat?
+                            Asperiores culpa, distinctio, ducimus ea eveniet ex facilis laborum minima nesciunt nihil
+                            nobis repellendus ut vel veritatis, voluptas voluptatum!</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-col">
+                        <div class="service-icon">
+
+
+                            <img class="img-responsive" src=" http://logonoid.com/images/bootstrap-logo.png">
+
+                        </div>
+                        <h2><a href="#">Bootstrap</a></h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid aspernatur
+                            maiores nemo perferendis praesentium quae recusandae repudiandae sint tempore. Ipsam
+                            laboriosam maiores maxime non nostrum provident reiciendis saepe totam.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End of Services Section -->
+
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section light-section dark-content">
+        <div class="container">
+            <h1 class="special-heading dark-special">Réalisation dans des domaines divers</h1>
+
+            <div class="row">
+                <div class="col-sm-4 post-col">
+                    <h2>Mondial de la simu 2012</h2>
+
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="1280" height="750" src="https://www.youtube.com/embed/Hk9mUy-pQKQ"
+                                frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <ul>
+                        <li>Vidéo montage pour nos partenaire lors du mondiale de la simu.</li>
+                        <li>Jeux Project Cars</li>
+                        <li>Photoshop pour la livrer de la voiture.</li>
+                        <li>After Effect pour le montage</li>
+                    </ul>
+                    <p>Grand Merci a thustmaster, Mobsim, Monster energy, Rseat et gameseat pour leur soutien . :)
+                    </p>
+                </div>
+                <div class="col-sm-4 post-col">
+
+                    <h2>Affiche évènementiel IRL - Online</h2>
+
+                    <div>
+                        <div class="col-sm-6">
+                            <a data-toggle="modal" data-target="#myPicture0"> <img class="img-responsive img-thumbnail"
+                                                                                   src="http://www.gtfusion.eu/images/GA2016/gamers_assembly_2016_thrustmaster.jpg"></a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myPicture0" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Gamers Assembly 2016</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a data-dismiss="modal"><img class="img-responsive img-thumbnail"
+                                                                     src="http://www.gtfusion.eu/images/GA2016/gamers_assembly_2016_thrustmaster.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <a data-toggle="modal" data-target="#myPicture1"> <img class="img-responsive img-thumbnail"
+                                                                                   src="http://4.bp.blogspot.com/-WGM2ozOhiVg/U4YOL4PA2FI/AAAAAAAAPz4/i7vhTPuUWFA/s1600/GTfusion-THRUSTMASTER-CHALENGE-RSEAT-SONY-PLAYSTATION-MARGOUIA-2014-FINALE-ONLINE-n.jpg"></a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myPicture1" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Thrustmaster Challenge 2014</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a data-dismiss="modal"><img class="img-responsive img-thumbnail"
+                                                                     src="http://4.bp.blogspot.com/-WGM2ozOhiVg/U4YOL4PA2FI/AAAAAAAAPz4/i7vhTPuUWFA/s1600/GTfusion-THRUSTMASTER-CHALENGE-RSEAT-SONY-PLAYSTATION-MARGOUIA-2014-FINALE-ONLINE-n.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a data-toggle="modal" data-target="#myPicture2"> <img class="img-responsive img-thumbnail"
+                                                                                   src="http://www.gtfusion.eu/images/GTfusion/2014/Rounds/Round-4.jpg"></a>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myPicture2" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">GTfusion 2014 - ROUND 4</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a data-dismiss="modal"><img class="img-responsive img-thumbnail"
+                                                                     src="http://www.gtfusion.eu/images/GTfusion/2014/Rounds/Round-4.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a data-toggle="modal" data-target="#myPicture3"> <img class="img-responsive img-thumbnail"
+                                                                                   src="http://www.gtfusion.eu/images/GTfusion/2013/Round6/gtfusion-2013-round6-suzuka-mcclaren-mp412c-dunlop.jpg"></a>
+                        </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myPicture3" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">NASCAR SPRINT UNLIMITED</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a data-dismiss="modal"><img class="img-responsive img-thumbnail"
+                                                                     src="http://www.gtfusion.eu/images/GTfusion/2013/Round6/gtfusion-2013-round6-suzuka-mcclaren-mp412c-dunlop.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 post-col">
+                    <h2>6h of Fuji 2012 WEC</h2>
+
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="1280" height="750" src="https://www.youtube.com/embed/7GoFqlKw9ig"
+                                frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+
+                    <p>Interview de philip sinault lors des 6h de fuji 2012 pour l'association gtfusion.</p>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End of Blog Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section light-section dark-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="special-heading dark-special">Contacter moi</h1>
+
+                    <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat,
+                        facilis, id, maiores tempore adipisci a corporis magni fugiat facere quo dolor.</p>
+
+                    <div class="row contact-informations">
+                        <div class="col-sm-4">
+                            <div class="contact-info clearfix">
+                                <i class="fa fa-map-marker"></i>
+                                <span>Freedom Street, 245<br>Amsterdam</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-info clearfix">
+                                <i class="fa fa-envelope"></i>
+                                <span>laurentnegre016@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-info clearfix">
+                                <i class="fa fa-phone"></i>
+                                <span>235 214 2326</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="result"></div>
+                    <form id="contact_form" class="contact-form" role="form" method="post"
+                          action="{{ path('contact') }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control input-lg" id="nameinput" placeholder="Name"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control input-lg" id="emailinput"
+                                           placeholder="Email" name="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" rows="10" name="message" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" id="humaninput"
+                                   placeholder="{{ "now"|date('d') }} + {{ "now"|date('H') }} =" name="human">
+                        </div>
+                        <div class="form-group">
+                            <button id="submit_btn" type="submit" class="btn btn-outline-white btn-big">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Contact Section -->
+
+
+    <!-- Footer -->
+    <section id="map" class="map-section" data-lat="44.86056" data-long="24.86778" data-zoom="17"
+             data-map-type="satellite">
+        <!-- <div id="map-canvas" style="width:100%; height:400px;" class="googleMap"></div> -->
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer photo-section dark-section light-content">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="social-icons light-icons">
+                <a href="https://www.facebook.com/laurent.negre.50"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/Slider016"><i class="fa fa-twitter"></i></a>
+                <a href="https://github.com/Raulnet"><i class="fa fa-github"></i></a>
+                <a href="https://plus.google.com/u/0/108391641836735543554/posts"><i
+                            class="fa fa-google-plus"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scrolltotop">
+        <i class="fa fa-chevron-up"></i>
+    </div>
+    <!-- End of Footer -->
+
+
+
+
+{% endblock %}{# ENDBLOCK CONTENT #}

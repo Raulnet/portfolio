@@ -1,0 +1,73 @@
+{% extends "/admin/layout.html.twig" %}
+{% set adminMenu = true %}
+
+{% block title %}Administration Add Player{% endblock %}
+
+{% block content %}
+    <div class="col-md-6">
+        <h2 class="text-center">{{ block('title') }}</h2>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('danger') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <div class="well">
+            {{ form_start(playerForm, { 'attr': {'class': 'form-horizontal'} }) }}
+            <div class="form-group">
+                {{ form_label(playerForm.nickname, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label' }}) }}
+                <div class="col-sm-6">
+                    {{ form_errors(playerForm.nickname) }}
+                    {{ form_widget(playerForm.nickname, { 'attr':  {
+                    'class': 'form-control' }}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(playerForm.email, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label' }}) }}
+                <div class="col-sm-6">
+                    {{ form_errors(playerForm.email) }}
+                    {{ form_widget(playerForm.email, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '8' }}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(playerForm.support, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label' }}) }}
+                <div class="col-sm-6">
+                    {{ form_errors(playerForm.support) }}
+                    {{ form_widget(playerForm.support, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '8' }}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(playerForm.comment, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label' }}) }}
+                <div class="col-sm-6">
+                    {{ form_errors(playerForm.comment) }}
+                    {{ form_widget(playerForm.comment, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '8' }}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-3">
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                    <a class="btn btn-default" href="{{ path('round', {'id': round.id}) }}">Retour</a>
+                </div>
+            </div>
+            {{ form_end(playerForm) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+
+{% endblock %}

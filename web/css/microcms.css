@@ -1,0 +1,78 @@
+body {
+    padding-top: 60px;
+}
+
+
+
+.articleMovie {
+
+    border-bottom: 1px solid lightskyblue;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+}
+
+.articleNextMovie {
+
+    border-bottom: 1px solid lightgreen;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+}
+
+.modal-header {
+    text-align: center;
+}
+.pagination {
+    margin: auto;
+}
+
+
+h4  {
+    margin-top: -0px;
+}
+
+.movieDate {
+    padding-top: 5px;
+   font-size: 10px;
+}
+
+.label {
+    font-size: 10px;
+    margin: auto;
+
+}
+
+article, p {
+
+    font-size: 12px;
+    color: darkslategrey;
+}
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.articleTitle:hover, .articleTitle:focus {
+    text-decoration: none;
+}
+
+.footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.slider {
+
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgreen;
+}
+
+.img-slider {
+    background-color: white;
+    padding: 2px;
+    margin: auto;
+}

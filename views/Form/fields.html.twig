@@ -1,0 +1,5 @@
+{% block timer_widget %}
+    <div {{ block('widget_container_attributes') }} class="timer form-group">
+        {% if with_hours %}{{ form_widget(form.hours) }}:{% endif %}{{ form_widget(form.minutes) }}:{{ form_widget(form.seconds) }}{% if with_milliseconds %}:{{ form_widget(form.milliseconds) }}{% endif %}
+    </div>
+{% endblock %}

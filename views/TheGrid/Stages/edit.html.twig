@@ -1,0 +1,55 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid_championships') }}">home</a></li>
+            <li><a href="{{ path('the_grid_show_championship', {'id': championship.id}) }}">{{ championship.title }}</a></li>
+            <li class="active">edit stage</li>
+        </ol>
+    </div>
+    <div class="col-sm-5 well">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.sta_title) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.sta_sequence) }}
+        </div>
+        <div class="form-group">
+            <div class="btn-group pull-right">
+                <a class="btn btn-default" href="{{ path('the_grid_show_championship', {'id': championship.id}) }}">Annuler</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delet_stage">supprimer</button>
+            </div>
+            {{ form_row(form.enregistrer) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="delet_stage" tabindex="-1" role="dialog" aria-labelledby="delet_stagelabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Supprimer {{ stage.title }}</h4>
+                </div>
+                <div class="modal-body">
+                    Attention vous allez supprimer tous se qui est lié à {{ stage.title }} !
+                    <br />
+                    Lounges, Results, etc...
+                    <br />
+                    Confirmer ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-danger" href="{{ path('the_grid_delete_stage', {'id': stage.id}) }}">Confirmer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

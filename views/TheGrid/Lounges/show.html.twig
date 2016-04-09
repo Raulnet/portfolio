@@ -1,0 +1,54 @@
+{% extends "/TheGrid/layout.html.twig" %}
+{% set game = 'index' %}
+
+{% block content %}
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('the_grid') }}">home</a></li>
+            <li><a href="{{ path('the_grid_show_stage', {'id': lounge.stageId}) }}">retour</a></li>
+        </ol>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ lounge.title }}</h3>
+            </div>
+            <div class="list-group">
+                {% for player in players %}
+                    {% if player.loungeId is defined %}
+                        {% if player.loungeId == lounge.id %}
+                            <a href="{{ path('the_grid_remove_player_to_lounge', {'loungeId': lounge.id, 'playerId': player.plo_id}) }}" class="list-group-item">
+                                <span class="badge">remove</span>
+                                {{ player.pla_nickname }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Players list</h3>
+            </div>
+            <div class="list-group">
+                {% for player in players %}
+                    {% if player.loungeId != null %}
+                        <a class="list-group-item list-group-item-info">
+                            <span class="badge">{{ player.lounge }}</span>
+                            {{ player.pla_nickname }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('the_grid_add_player_to_lounge', {'loungeId': lounge.id, 'playerId': player.pca_id}) }}" class="list-group-item">
+                            <span class="badge">add</span>
+                            {{ player.pla_nickname }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
